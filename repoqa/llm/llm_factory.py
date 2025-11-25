@@ -52,5 +52,9 @@ def get_llm(
 
     # --- Return LLM instance ---
     return OllamaLLM(
-        model=model_name, base_url=base_url, temperature=temperature, reasoning=False
+        model=model_name,
+        base_url=base_url,
+        temperature=temperature,
+        num_ctx=16000,
+        reasoning=True if kwargs.get("mode") == "agent" else False,
     )
