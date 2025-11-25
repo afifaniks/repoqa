@@ -40,6 +40,7 @@ class TestLLMFactory:
             base_url="http://localhost:11434",
             temperature=0.5,
             reasoning=False,
+            num_ctx=16000,
         )
 
     @patch("repoqa.llm.llm_factory.requests.post")
@@ -150,4 +151,5 @@ class TestLLMFactory:
             base_url="http://custom:8080",
             temperature=0.8,
             reasoning=False,
+            num_ctx=16000,
         )
