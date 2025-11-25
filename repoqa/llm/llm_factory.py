@@ -51,4 +51,6 @@ def get_llm(
         logger.info(f"Model '{model_name}' already available locally.")
 
     # --- Return LLM instance ---
-    return OllamaLLM(model=model_name, base_url=base_url, temperature=temperature)
+    return OllamaLLM(
+        model=model_name, base_url=base_url, temperature=temperature, reasoning=False
+    )

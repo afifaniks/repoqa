@@ -39,6 +39,7 @@ class TestLLMFactory:
             model="qwen3:1.7b",
             base_url="http://localhost:11434",
             temperature=0.5,
+            reasoning=False,
         )
 
     @patch("repoqa.llm.llm_factory.requests.post")
@@ -148,4 +149,5 @@ class TestLLMFactory:
             model="custom-model",
             base_url="http://custom:8080",
             temperature=0.8,
+            reasoning=False,
         )
