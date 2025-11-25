@@ -18,8 +18,8 @@ CRITICAL INSTRUCTIONS:
 2. After receiving an Observation, always continue with a new 'Thought:'.
 3. Never output unstructured text — always use the required labels.
 4. You must VIEW all relevant file contents before making conclusions. One query may require multiple files to answer.ß
-5. Keep reasoning concise but complete — don't skip intermediate reasoning steps.
-6. Stop only when you are confident enough to provide a 'Final Answer'.
+5. Keep reasoning concise and short — don't skip intermediate reasoning steps.
+6. Stop as soon as possible when you are confident enough to provide a 'Final Answer'.
 
 ---
 Now begin.
