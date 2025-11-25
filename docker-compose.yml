@@ -18,15 +18,10 @@ services:
       - ./repo_data:/app/repo_data
       # Persist Ollama models
       - ./ollama_data:/root/.ollama
-      # Mount SSH keys for private repositories (optional)
-      - ~/.ssh:/root/.ssh:ro
-      # Mount Git config (optional)
-      - ~/.gitconfig:/root/.gitconfig:ro
     environment:
       # Set Python path
       - PYTHONPATH=/app
-      # Configure GPU support
-      - CUDA_VISIBLE_DEVICES=0
+
     # Expose API port
     ports:
       - "8000:8000"

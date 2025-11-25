@@ -37,6 +37,8 @@ VOLUME ["/root/.ollama"]
 # Expose API port
 EXPOSE 8000
 
+ENV OLLAMA_CONTEXT_LENGTH=16000
+
 # Start services
 CMD echo "Starting Ollama server..." && \
     ollama serve & \
