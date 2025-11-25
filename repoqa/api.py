@@ -103,7 +103,9 @@ async def ask_question(request: QuestionRequest):
             embedding_model=config.embedding_model,
             collection_name=collection_name,
             collection_chunk_size=config.vectorstore_chunk_size,
-            llm_model=get_llm(llm_model, backend=config.llm_backend),
+            llm_model=get_llm(
+                llm_model, backend=config.llm_backend, kwargs={"mode": request.mode}
+            ),
             mode=request.mode,
             repo_path=config.repository_clone_directory,
             ollama_base_url=config.ollama_base_url,
