@@ -245,8 +245,8 @@ If you want to build the Docker image yourself:
 
 ```bash
 # Clone the repository
-git clone https://github.com/afifaniks/repo-qa.git
-cd repo-qa
+git clone https://github.com/afifaniks/repoqa.git
+cd repoqa
 
 # Build with Docker
 docker build -t repoqa .
