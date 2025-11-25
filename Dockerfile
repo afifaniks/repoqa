@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Install the package in editable mode
-RUN pip install -e .
+RUN pip install --no-cache-dir -e .
 
 # Create directory for Ollama data
 RUN mkdir -p /root/.ollama

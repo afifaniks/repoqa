@@ -82,3 +82,8 @@ license-report.txt
 ollama-data/*
 ollama_data/*
 ollama_data/
+htmlcov/
+.github/
+.pytest_cache/
+tests/
+docs/
