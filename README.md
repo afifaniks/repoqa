@@ -7,7 +7,8 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/afifaniks/repoqa)](https://hub.docker.com/r/afifaniks/repoqa)
 [![codecov](https://codecov.io/github/afifaniks/repoqa/graph/badge.svg?token=APVRZCE8G9)](https://codecov.io/github/afifaniks/repoqa)
 
-![](assets/preview.jpg)
+<img src="assets/preview.jpg" width="60%"/>
+
 <small><i>Image generated with ChatGPT</i></small>
 
 RepoQA is a software **repository-level question answering system** powered by **Retrieval-Augmented Generation (RAG)** and a **Large Language Model (LLM)**.  
@@ -93,6 +94,149 @@ curl -X POST http://localhost:8000/ask \
     "llm_model": "qwen3:1.7b"
   }'
 ```
+
+## API Documentation
+
+### Endpoints
+
+#### `POST /ask`
+
+Ask a question about a repository.
+
+**Request Body:**
+
+```json
+{
+  "repo": "string (required) - Repository URL or local path",
+  "question": "string (required) - Question about the repository",
+  "mode": "string (optional) - 'rag' or 'agent' (default: 'rag')",
+  "llm_model": "string (optional) - A valid Ollama LLM model name (default: from config)",
+  "force_update": "boolean (optional) - Force re-indexing (default: false)"
+}
+```
+
+**Response:**
+
+```json
+{
+  "question": "string - Your question",
+  "answer": "string - Generated answer",
+  "repo": "string - Repository path/URL"
+}
+```
+
+**Example Requests:**
+
+```bash
+# Basic question with default RAG mode
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{
+    "repo": "https://github.com/afifaniks/repoqa.git",
+    "question": "What are the permissible licenses in this repository?"
+  }'
+
+# Using agent mode for complex questions
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{
+    "repo": "https://github.com/afifaniks/repoqa.git",
+    "question": "How does the RAG pipeline work and what files implement it?",
+    "mode": "agent",
+    "llm_model": "qwen3:8b"
+  }'
+
+# Force re-indexing with custom model
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{
+    "repo": "https://github.com/afifaniks/repoqa.git",
+    "question": "Explain the architecture",
+    "llm_model": "qwen3:1.7b",
+    "force_update": true
+  }'
+```
+
+#### `GET /`
+
+Health check endpoint.
+
+**Response:**
+
+```json
+{
+  "status": "OK",
+  "service": "RepoQA API",
+  "version": "0.1.0"
+}
+```
+
+#### `GET /health`
+
+Detailed health check endpoint.
+
+**Response:**
+
+```json
+{
+  "status": "healthy"
+}
+```
+
+### Request Modes
+
+RepoQA supports two modes of operation, each optimized for different use cases:
+
+#### **RAG Mode** (Default)
+
+**When to use:**
+- **When you don't have access to a suitable GPU**
+- Simple, direct questions about repo/code functionality
+- Questions that can be answered with semantic search
+- Fast responses needed
+- Lower computational requirements
+
+**How it works:**
+- Uses pure Retrieval-Augmented Generation (RAG)
+- Performs semantic similarity search on indexed code
+- Retrieves top-k relevant documents
+- Generates answer based on retrieved context
+- Single-pass processing
+
+---
+
+#### **Agent Mode (Experimental)**
+
+**When to use:**
+- **If you have access to GPU**
+- Complex questions requiring multi-step reasoning
+- Questions about file structure and organization
+- Questions requiring directory navigation
+- Debugging and tracing code flow across files
+
+**How it works:**
+- Uses ReAct (Reasoning + Acting) agent framework
+- Has access to multiple tools:
+  - `semantic_search`: Find relevant code via similarity
+  - `similarity_search_with_score`: Search with relevance scores
+  - `list_directory`: Explore repository structure
+  - `read_file`: Read complete file contents
+- Agent iteratively uses tools to gather information
+- Reasons about what information is needed
+- Can explore repository structure dynamically
+
+_[This mode is still under development]_
+
+---
+
+
+### Interactive API Documentation
+
+Visit `http://localhost:8000/docs` for the interactive Swagger UI documentation where you can:
+- Try out API endpoints directly from your browser
+- See detailed request/response schemas
+- View example requests and responses
+- Test different modes and parameters
 
 
 ### Building from Source
