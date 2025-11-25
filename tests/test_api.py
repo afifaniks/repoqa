@@ -80,7 +80,6 @@ class TestAPI:
         data = response.json()
         assert data["question"] == "What is this repo about?"
         assert data["answer"] == "This is the answer."
-        assert data["indexed"] is True
         assert data["repo"] == "https://github.com/test/repo.git"
 
         # Verify indexing was called
@@ -117,7 +116,6 @@ class TestAPI:
 
         assert response.status_code == 200
         data = response.json()
-        assert data["indexed"] is False  # Should skip indexing
 
         # Verify indexing was NOT called
         mock_instance.index_repository.assert_not_called()
@@ -161,7 +159,6 @@ class TestAPI:
 
         assert response.status_code == 200
         data = response.json()
-        assert data["indexed"] is True
 
         # Verify collection was deleted and re-indexed
         mock_delete_collection.assert_called_once()

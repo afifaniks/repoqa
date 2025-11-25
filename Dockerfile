@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Install the package in editable mode
-RUN pip install -e .
+RUN pip install --no-cache-dir -e .
 
 # Create directory for Ollama data
 RUN mkdir -p /root/.ollama
@@ -36,6 +36,8 @@ VOLUME ["/root/.ollama"]
 
 # Expose API port
 EXPOSE 8000
+
+ENV OLLAMA_CONTEXT_LENGTH=16000
 
 # Start services
 CMD echo "Starting Ollama server..." && \

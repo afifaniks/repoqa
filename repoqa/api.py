@@ -56,7 +56,6 @@ class AnswerResponse(BaseModel):
     question: str
     answer: str
     repo: str
-    indexed: bool
 
 
 @app.get("/")
@@ -104,7 +103,9 @@ async def ask_question(request: QuestionRequest):
             embedding_model=config.embedding_model,
             collection_name=collection_name,
             collection_chunk_size=config.vectorstore_chunk_size,
-            llm_model=get_llm(llm_model, backend=config.llm_backend),
+            llm_model=get_llm(
+                llm_model, backend=config.llm_backend, kwargs={"mode": request.mode}
+            ),
             mode=request.mode,
             repo_path=config.repository_clone_directory,
             ollama_base_url=config.ollama_base_url,
@@ -112,7 +113,6 @@ async def ask_question(request: QuestionRequest):
         )
 
         # Index repository if collection doesn't exist or force_update is True
-        indexed = False
         if request.force_update or not collection_has_data:
             logger.info(f"Indexing repository: {request.repo}")
             result = repo_qa_instance.index_repository(
@@ -120,7 +120,6 @@ async def ask_question(request: QuestionRequest):
                 clone_dir=config.repository_clone_directory,
             )
             logger.info(f"Indexing completed: {result}")
-            indexed = True
         else:
             logger.info(
                 f"Collection '{collection_name}' already exists with data, "
@@ -135,7 +134,6 @@ async def ask_question(request: QuestionRequest):
             question=request.question,
             answer=answer,
             repo=request.repo,
-            indexed=indexed,
         )
 
     except Exception as e:
