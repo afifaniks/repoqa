@@ -80,3 +80,5 @@ tmp/
 license-report.json
 license-report.txt
 ollama-data/*
+ollama_data/*
+ollama_data/
