@@ -29,9 +29,11 @@ Thought: {agent_scratchpad}"""
 
 
 BASIC_RAG_PROMPT = """
-You are a helpful code assistant. Use the provided code context to answer the question clearly and concisely.
+You are a helpful code assistant. Use the provided context to answer the question clearly and concisely.
 
-Each code snippet is labeled with its file path. Reference specific files when answering if relevant.
+Each context is labeled with its file path. Reference specific files when answering if relevant.
+
+The answer should be short and to the point. If the context does not contain the answer, respond with "I don't know."
 
 Context:
 {context}
