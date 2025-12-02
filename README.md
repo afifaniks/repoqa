@@ -298,20 +298,6 @@ podman run \
   repoqa
 ```
 
-### Docker Compose
-
-For easier management, use docker-compose:
-
-```bash
-# Start the service
-docker-compose up
-
-# With custom settings
-REPO_PATH="https://github.com/your-repo.git" \
-QUESTION="Your question here" \
-docker-compose up
-```
-
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
