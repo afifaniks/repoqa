@@ -41,7 +41,7 @@ The framework is resource intensive and may not work with lower computing capabi
 ### Minimum Requirements
 - **CPU**: 8+ cores
 - **RAM**: 16 GB minimum
-- **GPU**: NVIDIA GPU with 6+ GB VRAM (for better LLM inference performance)
+- **GPU (Optional)**: NVIDIA GPU with 6+ GB VRAM (for better LLM inference performance)
 - **Disk Space**: 
   - 8 GB for Docker image
   - + The size of the LLM to be used
