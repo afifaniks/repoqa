@@ -44,7 +44,7 @@ The framework is resource intensive and may not work with lower computing capabi
 - **GPU (Optional)**: NVIDIA GPU with 6+ GB VRAM (for better LLM inference performance)
 - **Disk Space**: 
   - 8 GB for Docker image
-  - + The size of the LLM to be used
+  - \+ The size of the LLM to be used
   - Additional space for repository data and vector embeddings
 - **Network**: Internet connection for pulling models and repositories
 
