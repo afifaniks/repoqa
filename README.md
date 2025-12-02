@@ -90,7 +90,7 @@ curl -X POST http://localhost:8000/ask \
   -H "Content-Type: application/json" \
   -d '{
     "repo": "https://github.com/afifaniks/repoqa.git",
-    "question": "How does this application work?",
+    "question": "What are the permissible licenses in this repository?",
     "llm_model": "qwen3:1.7b"
   }'
 ```
