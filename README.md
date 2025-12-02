@@ -33,14 +33,29 @@ It allows users to ask natural language questions about a software repository an
    - The retrieved context is passed into an LLM with the user's question.  
    - The LLM generates a grounded and contextually accurate answer.  
 
+
+## Hardware Requirements
+
+The framework is resource intensive and may not work with lower computing capabilities. It was out of scope to benchmark it on different devices, the system has only been tested on NVIDIA L40S 48 GB GPU with Intel Intel(R) Xeon(R) Gold 6442Y CPU and on a Macbook Pro M1 16 GB machine. However, it should still work with lower configs with a sacrifice in performance.
+
+### Minimum Requirements
+- **CPU**: 8+ cores
+- **RAM**: 16 GB minimum
+- **GPU**: NVIDIA GPU with 6+ GB VRAM (for better LLM inference performance)
+- **Disk Space**: 
+  - 8 GB for Docker image
+  - + The size of the LLM to be used
+  - Additional space for repository data and vector embeddings
+- **Network**: Internet connection for pulling models and repositories
+
 ## Quick Start with Docker
 
 The easiest way to get started with RepoQA is using Docker:
 
 ### Prerequisites
 - Docker or Podman installed
-- NVIDIA GPU (optional, but recommended for better performance)
-- NVIDIA Container Toolkit (for GPU support)
+- NVIDIA GPU (optional, but recommended for Agent mode)
+- NVIDIA Container Toolkit (for GPU support with Docker)
 
 ### Pull and Run
 
